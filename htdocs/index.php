@@ -121,7 +121,9 @@ require_once('head.php');
 		</form>
 	</td>
 	</tr>
-	
+
 	</table>
+	<h2>Entity Relationship Diagram:</h2>
+	<img src="canary_ERD.png">
 </body>
 </html>
