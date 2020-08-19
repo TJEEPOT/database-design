@@ -1,5 +1,6 @@
 <?php
 $title="List Results";
+$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
@@ -12,7 +13,7 @@ echo "<body>";
 	{
 		$firstName=$_POST['firstName'];
 		$lastName=$_POST['lastName'];
-		$conn = mysqli_connect('localhost', 'root','password', 'canary');    
+		$conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
 		$query = "SELECT firstName, lastName, grade, seriesName, seriesYear, raceName, raceDate, position 
 					FROM member, series, race, competitor 
 					WHERE member.memberID = competitor.memberID

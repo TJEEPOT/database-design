@@ -1,10 +1,11 @@
 <?php
 $title="List Members";
+$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
     echo "<h2>$title</h2>";
-    $conn = mysqli_connect('localhost', 'root','password', 'canary');    
+    $conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
     $query = "SELECT * FROM member"; 
     $result = mysqli_query($conn, $query);
 	

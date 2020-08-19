@@ -1,5 +1,6 @@
 <?php
 $title="Enrol Member";
+$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
@@ -15,7 +16,7 @@ echo "<body>";
 		$lastName=$_POST['lastName'];
 		$courseName=$_POST['courseName'];
 		
-		$conn = mysqli_connect('localhost', 'root','password', 'canary');    
+		$conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
 		$query = "INSERT INTO enrolment (memberID, courseID)
 					(SELECT memberID, courseID
 					FROM course, member

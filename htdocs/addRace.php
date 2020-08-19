@@ -1,5 +1,6 @@
 <?php
 $title="Add Race";
+$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
@@ -18,7 +19,7 @@ echo "<body>";
 		$seriesName=$_POST['seriesName'];
 		$seriesYear=$_POST['_year'];
 		
-		$conn = mysqli_connect('localhost', 'root', 'password', 'canary');    
+		$conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
 		$query = "INSERT INTO race (seriesID, raceName, raceDate)
 					SELECT series.seriesID, '$raceName', '$raceDate'
 					FROM series 
