@@ -1,0 +1,49 @@
+
+name: database-design
+services:
+  web-php:
+    container_name: canary-web
+    env_file: "web-php.env"
+    build:
+      context: .. # allows us to access files in the project folder
+      dockerfile: ./_docker/Dockerfile
+    ports:
+      - 9001:80 # 80:80 for production, 9001:80 for testing
+    # volumes:  # comment out for testing
+    #   - _docker/apache:/etc/apache2/sites-enabled
+    #   - _docker/php/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - mariadb
+    networks:
+      - net
+  phpmyadmin:
+    container_name: canary-phpmyadmin
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    depends_on:
+      - mariadb
+    # volumes:  # comment this out for testing to ignore custom ini file.
+    #   - ./_docker/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - net
+  mariadb:  # This name represents the database host address internally on the container network
+    container_name: canary-db
+    image: mariadb:latest
+    restart: unless-stopped
+    env_file: "web-php.env"
+    volumes:  
+    #   - mysql_data:/var/lib/mysql  # Comment this out for development when you don't want to use the persistent data
+      - ../db:/docker-entrypoint-initdb.d  # Bind mount to load the test sql files at init. Comment this out for production
+    ports:
+      - 3306:3306
+    networks:
+      - net
+volumes:
+  mysql_data:  # Persistent volume for holding the database
+
+networks:
+  net: {}
