@@ -1,6 +1,5 @@
 <?php
 $title="Add Member";
-$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
@@ -18,7 +17,7 @@ echo "<body>";
 		$lastName=$_POST['lastName'];
 		$grade=$_POST['grade'];
 		
-		$conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
+		$conn = mysqli_connect('mariadb', $_ENV['MYSQL_USER'],$_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']); 
 		$query = "INSERT INTO member (firstName, lastName, grade) VALUES ( '$firstName','$lastName', '$grade')";
 		$result = mysqli_query($conn, $query);
 		if (mysqli_affected_rows($conn) <= 0)

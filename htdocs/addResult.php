@@ -1,6 +1,5 @@
 <?php
 $title="Add Result";
-$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
@@ -16,7 +15,7 @@ echo "<body>";
 		$raceID=$_POST['raceID'];
 		$position=$_POST['position'];
 		
-		$conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
+		$conn = mysqli_connect('mariadb', $_ENV['MYSQL_USER'],$_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']); 
 		$query = "UPDATE competitor SET position = '$position' 
 					WHERE memberID = '$memberID'
 					AND raceID = '$raceID'";

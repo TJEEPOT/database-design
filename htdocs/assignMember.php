@@ -1,6 +1,5 @@
 <?php
 $title="Assign Member";
-$db = parse_ini_file("db.ini"); // ENSURE THIS FILE IS AVAILABLE IN HTDOCS
 require_once('head.php');
 
 echo "<body>";
@@ -13,7 +12,7 @@ echo "<body>";
 		$memberID=$_POST['memberID'];
 		$raceID=$_POST['raceID'];
 		
-		$conn = mysqli_connect($db['host'], $db['user'],$db['password'], $db['database']); 
+		$conn = mysqli_connect('mariadb', $_ENV['MYSQL_USER'],$_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']); 
 		$query = "INSERT INTO competitor VALUES (NULL, '$memberID', '$raceID', NULL)";		
 		
 		$result = mysqli_query($conn, $query);
