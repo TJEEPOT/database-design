@@ -13,7 +13,7 @@ Later changes included moving the entire project into Docker containers, so that
 
 # Usage Notes #
 Feel free to try out the project in demo mode.
-Firstly, pull this project onto your local machine using git. I recommended that you also grab the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/) in order to better manage the containers, although this isn't strictly required.
+Firstly, pull this project onto your local machine using git. If you're not running the services on your own machine then you will also need to grab the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/) in order to better manage the containers.
 
 You will need to create a suitable .env file to run the project. To do so, open a terminal in the project root folder `database-design` and run `python _docker/create_secrets.py`. This will create a file in `_docker` called `web-php.env`, which is needed to create the test database.
 
